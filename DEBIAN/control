@@ -1,0 +1,20 @@
+Package: skkzram
+Version: 1.1
+Architecture: all
+Maintainer: Skykaiser <chengao246@gmail.com>
+Depends: bash, util-linux, kmod
+Section: admin
+Priority: optional
+Description: Lightweight zram swap management via systemd
+ Automatically sets up zram swap at boot; configurable via /etc/skkzram.conf.
+ .
+ This package provides enhanced zram swap management with:
+  - Configurable compression algorithm (lzo, lz4, zlib, lz4hc, zstd)
+  - Adjustable swap size and priority
+  - Multiple zram device support
+  - Advanced logging with multiple levels
+  - Writeback device support for idle pages
+  - Memory percentage-based sizing
+  - Idle page writeback timeout configuration
+  - Detailed monitoring capabilities
+Installed-Size: 120

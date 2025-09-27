@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+
+# 日志函数
+log_info() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') [INFO] skkzram(postinst): $*"
+}
+
+log_error() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') [ERROR] skkzram(postinst): $*" >&2
+}
+
+case "$1" in
+    configure)
+        log_info "Configuring skkzram package"
+        # 首次安装或升级后重启服务
+        if [ -d /run/systemd/system ]; then
+            log_info "Reloading systemd and enabling skkzram service"
+            systemctl daemon-reload
+            systemctl enable skkzram.service
+            
+            if systemctl start skkzram.service; then
+                log_info "skkzram service started successfully"
+            else
+                log_error "Failed to start skkzram service"
+                exit 1
+            fi
+        else
+            log_info "systemd not detected, skipping service setup"
+        fi
+        ;;
+    *)
+        log_info "No action needed for $1"
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

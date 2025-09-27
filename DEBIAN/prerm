@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+# 日志函数
+log_info() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') [INFO] skkzram(prerm): $*"
+}
+
+log_warn() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') [WARN] skkzram(prerm): $*"
+}
+
+case "$1" in
+    remove|upgrade)
+        log_info "Processing $1 for skkzram"
+        if [ -d /run/systemd/system ]; then
+            log_info "Stopping and disabling skkzram service"
+            systemctl stop skkzram.service || log_warn "Failed to stop skkzram service"
+            systemctl disable skkzram.service || log_warn "Failed to disable skkzram service"
+        else
+            log_info "systemd not detected, skipping service shutdown"
+        fi
+        ;;
+    *)
+        log_info "No action needed for $1"
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

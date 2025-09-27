@@ -1,0 +1,16 @@
+[Unit]
+Description=SKK zram swap (skkzram)
+After=local-fs.target
+Before=swap.target swapon.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/skkzram start
+ExecStop=/usr/local/sbin/skkzram stop
+ExecStatus=/usr/local/sbin/skkzram monitor
+TimeoutStartSec=30
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
