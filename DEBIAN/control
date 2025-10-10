@@ -1,5 +1,5 @@
 Package: skkzram
-Version: 1.1
+Version: 1.2
 Architecture: all
 Maintainer: Skykaiser <chengao246@gmail.com>
 Depends: bash, util-linux, kmod
