@@ -55,7 +55,7 @@ log_debug() {
 # 读配置文件（如果存在）
 if [[ -f $CONF ]]; then
     log_debug "Loading configuration from $CONF"
-    . "$CONF"
+    source "$CONF"
 else
     log_debug "Configuration file $CONF does not exist"
 fi
